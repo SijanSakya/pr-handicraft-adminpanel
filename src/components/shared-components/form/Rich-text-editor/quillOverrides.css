@@ -1,0 +1,30 @@
+/* This affects the editor input area */
+.ql-editor {
+  min-height: 250px;
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 12px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Optional: remove padding from outer wrapper if needed */
+.ql-container {
+  border-radius: 6px;
+  overflow-x: hidden;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ql-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.ql-image-resize-overlay {
+  border: 1px dashed #999;
+}
