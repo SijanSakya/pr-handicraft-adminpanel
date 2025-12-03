@@ -2,12 +2,10 @@
 import Checkbox from '@/components/shared-components/form/input/Checkbox';
 import InputField from '@/components/shared-components/form/input/InputField';
 import Button from '@/components/shared-components/ui/button/Button';
-import { extractErrorMessages } from '@/helpers/helpers';
-import useApiMutation from '@/lib/react-query/useReactMutation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -20,6 +18,7 @@ export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter();
+  const [isPending] = useTransition();
 
   type Inputs = z.infer<typeof loginSchema>;
 
@@ -36,23 +35,7 @@ export default function SignInForm() {
     },
   });
 
-  const { mutate, isPending, error, data: loginData, isSuccess: loginSuccess } = useApiMutation('auth/login');
-
-  const onSubmit = (data: any) => {
-    mutate({
-      data: { ...data },
-      isMultipart: false,
-      onSuccessCallback: () => {
-        router.push(`/`);
-      },
-      onErrorCallback: (resp) => {
-        const errorData = resp?.message?.data?.non_field_errors;
-
-        const messages = extractErrorMessages(errorData);
-        alert(errorData);
-      },
-    });
-  };
+  const onSubmit = (data: any) => {};
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">

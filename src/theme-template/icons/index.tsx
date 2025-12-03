@@ -1,109 +1,121 @@
-import PlusIcon from "./plus.svg";
-import CloseIcon from "./close.svg";
-import BoxIcon from "./box.svg";
-import CheckCircleIcon from "./check-circle.svg";
-import AlertIcon from "./alert.svg";
-import InfoIcon from "./info.svg";
-import ErrorIcon from "./info-hexa.svg";
-import BoltIcon from "./bolt.svg";
-import ArrowUpIcon from "./arrow-up.svg";
-import ArrowDownIcon from "./arrow-down.svg";
-import FolderIcon from "./folder.svg";
-import VideoIcon from "./videos.svg";
-import AudioIcon from "./audio.svg";
-import GridIcon from "./grid.svg";
-import FileIcon from "./file.svg";
-import DownloadIcon from "./download.svg";
-import ArrowRightIcon from "./arrow-right.svg";
-import GroupIcon from "./group.svg";
-import BoxIconLine from "./box-line.svg";
-import ShootingStarIcon from "./shooting-star.svg";
-import DollarLineIcon from "./dollar-line.svg";
-import TrashBinIcon from "./trash.svg";
-import AngleUpIcon from "./angle-up.svg";
-import AngleDownIcon from "./angle-down.svg";
-import PencilIcon from "./pencil.svg";
-import CheckLineIcon from "./check-line.svg";
-import CloseLineIcon from "./close-line.svg";
-import ChevronDownIcon from "./chevron-down.svg";
-import ChevronUpIcon from "./chevron-up.svg";
-import PaperPlaneIcon from "./paper-plane.svg";
-import LockIcon from "./lock.svg";
-import EnvelopeIcon from "./envelope.svg";
-import UserIcon from "./user-line.svg";
-import CalenderIcon from "./calender-line.svg";
-import EyeIcon from "./eye.svg";
-import EyeCloseIcon from "./eye-close.svg";
-import TimeIcon from "./time.svg";
-import CopyIcon from "./copy.svg";
-import ChevronLeftIcon from "./chevron-left.svg";
-import UserCircleIcon from "./user-circle.svg";
-import TaskIcon from "./task-icon.svg";
-import ListIcon from "./list.svg";
-import TableIcon from "./table.svg";
-import PageIcon from "./page.svg";
-import PieChartIcon from "./pie-chart.svg";
-import BoxCubeIcon from "./box-cube.svg";
-import PlugInIcon from "./plug-in.svg";
-import DocsIcon from "./docs.svg";
-import MailIcon from "./mail-line.svg";
-import HorizontaLDots from "./horizontal-dots.svg";
-import ChatIcon from "./chat.svg";
-import MoreDotIcon from "./more-dot.svg";
-import BellIcon from "./bell.svg";
+import React from 'react';
 
-export {
-  DownloadIcon,
-  BellIcon,
-  MoreDotIcon,
-  FileIcon,
-  GridIcon,
-  AudioIcon,
-  VideoIcon,
-  BoltIcon,
-  PlusIcon,
-  BoxIcon,
-  CloseIcon,
-  CheckCircleIcon,
-  AlertIcon,
-  InfoIcon,
-  ErrorIcon,
-  ArrowUpIcon,
-  FolderIcon,
-  ArrowDownIcon,
-  ArrowRightIcon,
-  GroupIcon,
-  BoxIconLine,
-  ShootingStarIcon,
-  DollarLineIcon,
-  TrashBinIcon,
-  AngleUpIcon,
-  AngleDownIcon,
-  PencilIcon,
-  CheckLineIcon,
-  CloseLineIcon,
-  ChevronDownIcon,
-  PaperPlaneIcon,
-  EnvelopeIcon,
-  LockIcon,
-  UserIcon,
-  CalenderIcon,
-  EyeIcon,
-  EyeCloseIcon,
-  TimeIcon,
-  CopyIcon,
-  ChevronLeftIcon,
-  UserCircleIcon,
-  ListIcon,
-  TableIcon,
-  PageIcon,
-  TaskIcon,
-  PieChartIcon,
-  BoxCubeIcon,
-  PlugInIcon,
-  DocsIcon,
-  MailIcon,
-  HorizontaLDots,
-  ChevronUpIcon,
-  ChatIcon,
-};
+import AlertIconSrc from './alert.svg';
+import AngleDownIconSrc from './angle-down.svg';
+import AngleUpIconSrc from './angle-up.svg';
+import ArrowDownIconSrc from './arrow-down.svg';
+import ArrowRightIconSrc from './arrow-right.svg';
+import ArrowUpIconSrc from './arrow-up.svg';
+import AudioIconSrc from './audio.svg';
+import BellIconSrc from './bell.svg';
+import BoltIconSrc from './bolt.svg';
+import BoxCubeIconSrc from './box-cube.svg';
+import BoxIconLineSrc from './box-line.svg';
+import BoxIconSrc from './box.svg';
+import CalenderIconSrc from './calender-line.svg';
+import ChatIconSrc from './chat.svg';
+import CheckCircleIconSrc from './check-circle.svg';
+import CheckLineIconSrc from './check-line.svg';
+import ChevronDownIconSrc from './chevron-down.svg';
+import ChevronLeftIconSrc from './chevron-left.svg';
+import ChevronUpIconSrc from './chevron-up.svg';
+import CloseLineIconSrc from './close-line.svg';
+import CloseIconSrc from './close.svg';
+import CopyIconSrc from './copy.svg';
+import DocsIconSrc from './docs.svg';
+import DollarLineIconSrc from './dollar-line.svg';
+import DownloadIconSrc from './download.svg';
+import EnvelopeIconSrc from './envelope.svg';
+import EyeCloseIconSrc from './eye-close.svg';
+import EyeIconSrc from './eye.svg';
+import FileIconSrc from './file.svg';
+import FolderIconSrc from './folder.svg';
+import GridIconSrc from './grid.svg';
+import GroupIconSrc from './group.svg';
+import HorizontaLDotsSrc from './horizontal-dots.svg';
+import ErrorIconSrc from './info-hexa.svg';
+import InfoIconSrc from './info.svg';
+import ListIconSrc from './list.svg';
+import LockIconSrc from './lock.svg';
+import MailIconSrc from './mail-line.svg';
+import MoreDotIconSrc from './more-dot.svg';
+import PageIconSrc from './page.svg';
+import PaperPlaneIconSrc from './paper-plane.svg';
+import PencilIconSrc from './pencil.svg';
+import PieChartIconSrc from './pie-chart.svg';
+import PlugInIconSrc from './plug-in.svg';
+import PlusIconSrc from './plus.svg';
+import ShootingStarIconSrc from './shooting-star.svg';
+import TableIconSrc from './table.svg';
+import TaskIconSrc from './task-icon.svg';
+import TimeIconSrc from './time.svg';
+import TrashBinIconSrc from './trash.svg';
+import UserCircleIconSrc from './user-circle.svg';
+import UserIconSrc from './user-line.svg';
+import VideoIconSrc from './videos.svg';
+
+function toComponent(mod: any) {
+  const value = mod && (mod.default ?? mod);
+  if (typeof value === 'string') {
+    return (props: React.ImgHTMLAttributes<HTMLImageElement>) =>
+      React.createElement('img', { src: value, alt: '', ...props });
+  }
+  if (typeof value === 'function') {
+    return (props: any) => React.createElement(value, props);
+  }
+  return () => null;
+}
+
+export const DownloadIcon = toComponent(DownloadIconSrc);
+export const BellIcon = toComponent(BellIconSrc);
+export const MoreDotIcon = toComponent(MoreDotIconSrc);
+export const FileIcon = toComponent(FileIconSrc);
+export const GridIcon = toComponent(GridIconSrc);
+export const AudioIcon = toComponent(AudioIconSrc);
+export const VideoIcon = toComponent(VideoIconSrc);
+export const BoltIcon = toComponent(BoltIconSrc);
+export const PlusIcon = toComponent(PlusIconSrc);
+export const BoxIcon = toComponent(BoxIconSrc);
+export const CloseIcon = toComponent(CloseIconSrc);
+export const CheckCircleIcon = toComponent(CheckCircleIconSrc);
+export const AlertIcon = toComponent(AlertIconSrc);
+export const InfoIcon = toComponent(InfoIconSrc);
+export const ErrorIcon = toComponent(ErrorIconSrc);
+export const ArrowUpIcon = toComponent(ArrowUpIconSrc);
+export const FolderIcon = toComponent(FolderIconSrc);
+export const ArrowDownIcon = toComponent(ArrowDownIconSrc);
+export const ArrowRightIcon = toComponent(ArrowRightIconSrc);
+export const GroupIcon = toComponent(GroupIconSrc);
+export const BoxIconLine = toComponent(BoxIconLineSrc);
+export const ShootingStarIcon = toComponent(ShootingStarIconSrc);
+export const DollarLineIcon = toComponent(DollarLineIconSrc);
+export const TrashBinIcon = toComponent(TrashBinIconSrc);
+export const AngleUpIcon = toComponent(AngleUpIconSrc);
+export const AngleDownIcon = toComponent(AngleDownIconSrc);
+export const PencilIcon = toComponent(PencilIconSrc);
+export const CheckLineIcon = toComponent(CheckLineIconSrc);
+export const CloseLineIcon = toComponent(CloseLineIconSrc);
+export const ChevronDownIcon = toComponent(ChevronDownIconSrc);
+export const ChevronUpIcon = toComponent(ChevronUpIconSrc);
+export const PaperPlaneIcon = toComponent(PaperPlaneIconSrc);
+export const EnvelopeIcon = toComponent(EnvelopeIconSrc);
+export const LockIcon = toComponent(LockIconSrc);
+export const UserIcon = toComponent(UserIconSrc);
+export const CalenderIcon = toComponent(CalenderIconSrc);
+export const EyeIcon = toComponent(EyeIconSrc);
+export const EyeCloseIcon = toComponent(EyeCloseIconSrc);
+export const TimeIcon = toComponent(TimeIconSrc);
+export const CopyIcon = toComponent(CopyIconSrc);
+export const ChevronLeftIcon = toComponent(ChevronLeftIconSrc);
+export const UserCircleIcon = toComponent(UserCircleIconSrc);
+export const ListIcon = toComponent(ListIconSrc);
+export const TableIcon = toComponent(TableIconSrc);
+export const PageIcon = toComponent(PageIconSrc);
+export const TaskIcon = toComponent(TaskIconSrc);
+export const PieChartIcon = toComponent(PieChartIconSrc);
+export const BoxCubeIcon = toComponent(BoxCubeIconSrc);
+export const PlugInIcon = toComponent(PlugInIconSrc);
+export const DocsIcon = toComponent(DocsIconSrc);
+export const MailIcon = toComponent(MailIconSrc);
+export const HorizontaLDots = toComponent(HorizontaLDotsSrc);
+export const ChatIcon = toComponent(ChatIconSrc);

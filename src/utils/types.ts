@@ -198,8 +198,8 @@ export type ColumnKey =
       type: ColumnType.BOOLEAN;
       header: string;
       accessorKey: string;
-  }|
-   | {
+    }
+  | {
       type: ColumnType.CUSTOM;
       header: string;
       accessorKey: string;

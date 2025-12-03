@@ -1,12 +1,20 @@
 'use client';
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-interface GlobalContextProps {}
+interface GlobalContextProps {
+  selectedServiceId: number | null;
+  setSelectedServiceId: any;
+}
 
 const GlobalContextProvider = createContext<GlobalContextProps>(undefined!);
 
 export function GlobalContext({ children }: Readonly<PropsWithChildren>) {
-  const contextValue: GlobalContextProps = {};
+  const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
+
+  const contextValue: GlobalContextProps = {
+    selectedServiceId,
+    setSelectedServiceId,
+  };
 
   return <GlobalContextProvider.Provider value={contextValue}>{children}</GlobalContextProvider.Provider>;
 }
