@@ -3,8 +3,11 @@ import Checkbox from '@/components/shared-components/form/input/Checkbox';
 import FileInput from '@/components/shared-components/form/input/FileInput';
 import InputField from '@/components/shared-components/form/input/InputField';
 import Button from '@/components/shared-components/ui/button/Button';
+import { useSupabaseMutation } from '@/hooks/supabase-query/useSupabaseMutation';
+import { mutationType } from '@/utils/enums';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 interface createCateProps {
@@ -39,26 +42,32 @@ const CreateProductCategories = ({ isEditing, editingDetails, refetch, closeModa
     },
   });
 
-  // const { mutate, isPending } = useApiMutation(
-  //   isEditing ? `adventure-categories/${editingDetails?.slug}/` : `adventure-categories/`
-  // );
+  const { mutate, isPending } = useSupabaseMutation({
+    table: 'Categories',
+    type: isEditing ? mutationType.UPDATE : mutationType.INSERT,
+    ...(isEditing && { match: { id: editingDetails?.id } }),
+  });
 
   const onSubmit = async (value: any) => {
-    // mutate({
-    //   data: { ...value },
-    //   isEditing: isEditing,
-    //   isMultipart: false,
-    //   onSuccessCallback: () => {
-    //     toast.success(isEditing ? 'Successfully edited product category' : 'Successfully created product category');
-    //     closeModal();
-    //     refetch();
-    //   },
-    //   onErrorCallback: (resp) => {
-    //     const errorData = resp?.message?.data;
-    //     const messages = extractErrorMessages(errorData);
-    //     messages.forEach((msg) => toast.error(msg));
-    //   },
-    // });
+    const image = value?.image;
+
+    const payload = {
+      ...value,
+      image: null,
+    };
+    mutate({
+      data: payload,
+      isEditing,
+      onSuccessCallback: () => {
+        toast.success(isEditing ? 'Updated category' : 'Created category');
+        closeModal();
+        refetch();
+      },
+      onErrorCallback: (err) => {
+        const msg = err?.message || 'Error occurred';
+        toast.error(msg);
+      },
+    });
   };
 
   return (

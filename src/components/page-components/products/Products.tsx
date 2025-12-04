@@ -6,12 +6,14 @@ import ReactTableLoader from '@/components/shared-components/tables/ReactTableLo
 import ReactTableWrapper from '@/components/shared-components/tables/ReactTableWrapper';
 import IconBtn from '@/components/shared-components/ui/button/IconBtn';
 import { Modal } from '@/components/shared-components/ui/modal';
-import { useFetchQuery } from '@/hooks/useFetchQuery';
+import { useFetchQuery } from '@/hooks/api/useFetchQuery';
+import { useSupabaseMutation } from '@/hooks/supabase-query/useSupabaseMutation';
 import { useModal } from '@/hooks/useModal';
 import { useTableColumns } from '@/hooks/useTableColumns';
-import { ColumnType } from '@/utils/enums';
+import { ColumnType, mutationType } from '@/utils/enums';
 import { ColumnKey } from '@/utils/types';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import CreateProduct from './create-product/CreateProduct';
 
 const Products = () => {
@@ -22,7 +24,7 @@ const Products = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingDetails, setEditingDetails] = useState<null | any>(null);
 
-  const { data, isLoading, error } = useFetchQuery({
+  const { data, isLoading, refetch, error } = useFetchQuery({
     endpoint: '/api/collections',
     queryKey: ['collections'],
     // queryParams: { main_collection: false },
@@ -37,8 +39,6 @@ const Products = () => {
     queryKey: ['categories'],
     // queryParams: { main_collection: false },
   });
-
-  console.log(cateData);
 
   const columnsKey: ColumnKey[] = [
     { header: 'Title', accessorKey: 'title' },
@@ -70,15 +70,23 @@ const Products = () => {
     getId: true,
   });
 
-  // const { currentData, totalPages, handlePageChange, currentPage, totalCount, handleSelectedPage } = usePagination({
-  //   data,
-  //   page,
-  //   setPage,
-  //   itemPerPage,
-  // });
+  const { mutate, isPending } = useSupabaseMutation({
+    table: 'Collections',
+    type: mutationType.DELETE,
+    match: { id: deleteId },
+  });
 
   const handleDelete = () => {
-    closeDeleteModal();
+    mutate({
+      onSuccessCallback: () => {
+        toast.success('Product deleted!');
+        closeDeleteModal();
+        refetch();
+      },
+      onErrorCallback: (err) => {
+        toast.error(err?.message || 'Delete failed');
+      },
+    });
   };
   return (
     <ComponentCard title={'Products List'}>
@@ -99,7 +107,7 @@ const Products = () => {
           isEditing={isEditing}
           editingDetails={editingDetails}
           closeModal={closeModal}
-          //refetch={refetch}
+          refetch={refetch}
         />
       </Modal>
 

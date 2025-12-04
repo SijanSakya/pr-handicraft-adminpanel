@@ -14,3 +14,9 @@ export enum ColumnType {
   ACTIONS = 'actions',
   CUSTOM = 'custom',
 }
+
+export enum mutationType {
+  INSERT = 'insert',
+  UPDATE = 'update',
+  DELETE = 'delete',
+}

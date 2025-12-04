@@ -59,8 +59,12 @@ const SelectField: FC<SelectFieldProps> = ({
         } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
       >
-        <span className={`${value ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>
-          {value ? options.find((opt) => opt.value === value)?.label : placeholder}
+        <span
+          className={`${
+            value ? 'text-gray-900 dark:text-white text-sm font-normal' : 'text-gray-400 text-sm font-normal'
+          }`}
+        >
+          {value ? options.find((opt) => opt.value == value)?.label : placeholder}
         </span>
         <svg
           className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}

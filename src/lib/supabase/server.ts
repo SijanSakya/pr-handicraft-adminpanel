@@ -4,7 +4,6 @@ import { SUPABASE_KEY, SUPABASE_URL } from '../getEnvs';
 const cookieOptions = {
   getAll: () => [], // return empty array
   setAll: () => {}, // do nothing
-  // Optional for new API
   get: (name: string) => null,
   set: (name: string, value: string, options?: any) => {},
   remove: (name: string) => {},

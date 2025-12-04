@@ -1,7 +1,9 @@
 'use client';
-import { deleteCookie, getCookie } from '@/helpers/helpers';
+import { getCookie } from '@/helpers/helpers';
+import { getSupabaseClient } from '@/lib/supabase/supabaseClient';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Dropdown } from '../ui/dropdown/Dropdown';
 import { DropdownItem } from '../ui/dropdown/DropdownItem';
 
@@ -19,6 +21,19 @@ export default function UserDropdown() {
   function closeDropdown() {
     setIsOpen(false);
   }
+
+  const supabase = getSupabaseClient();
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success('Signed out successfully');
+    router.push('/signin');
+  };
   return (
     <div className="relative">
       <button onClick={toggleDropdown} className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle">
@@ -137,12 +152,7 @@ export default function UserDropdown() {
         </ul>
         <button
           className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-          onClick={() => {
-            deleteCookie('mAcc');
-            deleteCookie('mTok');
-            deleteCookie('mUser');
-            router.push(`/signin`);
-          }}
+          onClick={handleSignOut}
         >
           <svg
             className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
