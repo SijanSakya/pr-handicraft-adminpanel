@@ -18,6 +18,8 @@ export async function GET(req: NextRequest, { params }: { params: { table: strin
       query = query.eq(key, value);
     });
 
+    query = query.order('created_at', { ascending: false });
+
     const { data, error } = await query;
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });

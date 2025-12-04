@@ -32,6 +32,9 @@ export async function GET(req: NextRequest, { params }: { params: { table: strin
       query = query.eq('is_latest', isLatest.toLowerCase() === 'true');
     }
 
+    // Sort latest first by `created_at` descending
+    query = query.order('created_at', { ascending: false });
+
     // Apply pagination
     query = query.range(from, to);
 
